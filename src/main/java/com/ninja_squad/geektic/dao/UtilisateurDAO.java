@@ -20,7 +20,7 @@ public class UtilisateurDAO {
 	}
 	
 	public List<Utilisateur> findAll() {
-		String jpql = "select u from Utilisateur as u"; 
+		String jpql = "select distinct(u) from Utilisateur as u LEFT JOIN FETCH u.interets"; 
 		TypedQuery<Utilisateur> query = entityManager.createQuery(jpql, Utilisateur.class); 
 		List<Utilisateur> utilisateurs = query.getResultList();
 		return utilisateurs;

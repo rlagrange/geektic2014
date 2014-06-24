@@ -1,0 +1,12 @@
+<h1>La liste des utilisateurs</h1>
+<div class="row">
+    <div class="col-lg-12">
+        <div ng-controller="UsersCtrl">
+            <ul ng-repeat="user in users">
+                <li>
+                    <a href="#utilisateur?id={{user.id}}">Nom : {{user.nom}} </a><br />
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
