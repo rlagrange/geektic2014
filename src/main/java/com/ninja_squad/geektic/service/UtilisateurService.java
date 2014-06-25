@@ -34,6 +34,11 @@ public class UtilisateurService {
 	private UtilisateurDAO udao;
 	
 	public UtilisateurService() {
+		
+	}
+	
+	public UtilisateurService(UtilisateurDAO dao) {
+		this.udao = dao;
 	}
 	
 	@RequestMapping(value="/show/{id}", method = RequestMethod.GET)

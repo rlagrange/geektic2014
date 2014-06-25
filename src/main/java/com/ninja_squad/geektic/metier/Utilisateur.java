@@ -71,4 +71,17 @@ public class Utilisateur {
 	public void setSexe(String sexe) {
 		this.sexe = sexe;
 	}
+	
+	public Utilisateur() {
+		
+	}
+	
+	public Utilisateur(Integer id, String nom, String prenom, String sexe, String mail) {
+		this.id = id;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.sexe = sexe;
+		this.mail = mail;
+	}
+
 }
