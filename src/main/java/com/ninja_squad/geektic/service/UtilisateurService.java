@@ -1,16 +1,24 @@
 package com.ninja_squad.geektic.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.transaction.Transactional;
+
+
+
+
 
 
 
@@ -22,23 +30,31 @@ import com.ninja_squad.geektic.metier.Utilisateur;
 @RequestMapping("/api/utilisateur")
 public class UtilisateurService {
 	
-	private static EntityManagerFactory emFactory;
-	private EntityManager em;
+	@Autowired
+	private UtilisateurDAO udao;
 	
 	public UtilisateurService() {
-		emFactory = Persistence.createEntityManagerFactory("GEEKTIC");
-		em = emFactory.createEntityManager();
 	}
 	
 	@RequestMapping(value="/show/{id}", method = RequestMethod.GET)
 	public Utilisateur show(@PathVariable("id") Integer id) {
-		UtilisateurDAO udao = new UtilisateurDAO(em);
 		return udao.find(id);
 	}
 	
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public List<Utilisateur> index() {
-		UtilisateurDAO udao = new UtilisateurDAO(em);
 		return udao.findAll();
+	}
+	
+	@RequestMapping(value="/showByInterestAndSexe", method = RequestMethod.GET)
+	public List<Utilisateur> showByInterestAndSexe(
+			@RequestParam("interests") String interests, @RequestParam("sexe") String sexe	
+			) {
+		List<Integer> ints = new ArrayList<Integer>();
+		String[] temp = interests.split(",");
+		for (String i : temp) {
+			ints.add(Integer.parseInt(i));
+		}
+		return udao.findByInterestAndSexe(ints, sexe);
 	}
 }

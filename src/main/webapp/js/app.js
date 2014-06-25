@@ -18,6 +18,27 @@ app.controller('rechercheInitCtrl', function($scope, $http) {
     $http.get('http://localhost:8080/api/centre_interet/list').success(function(data, status, headers, config) {
         $scope.cis = data;
     });
+    
+    $scope.doSelected = function(e) {
+    	if ($scope.selection.indexOf(e) > - 1) {
+    		var index  = $scope.selection.indexOf(e);
+    			$scope.selection.splice(index, 1);
+    	} else {
+    		$scope.selection.push(e);
+    	}
+    }
+    
+    $scope.selection = [];
+    $scope.recherche = false;
+
+
+    $scope.rechercher = function() {
+        $http.get('http://localhost:8080/api/utilisateur/showByInterestAndSexe?interests=' + $scope.selection.join() + '&sexe=' + $scope.sexe).success(function(data, status, headers, config) {
+            $scope.users = data;
+        });
+    	// On va pouvoir lancer la recherche
+    	$scope.recherche = true;
+    }
 });
 
 

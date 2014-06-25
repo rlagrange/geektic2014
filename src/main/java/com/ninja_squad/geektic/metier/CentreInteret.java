@@ -4,9 +4,12 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="CENTRE_INTERET")
@@ -33,6 +36,20 @@ public class CentreInteret {
 		this.libelle = libelle;
 	}
 	
-	@ManyToMany(mappedBy = "interets")
+	private List<Utilisateur> getUtilisateurs() {
+		return utilisateurs;
+	}
+
+	private void setUtilisateurs(List<Utilisateur> utilisateurs) {
+		this.utilisateurs = utilisateurs;
+	}
+
+	@JsonIgnore
+	@ManyToMany
+	@JoinTable(
+      name="UTILISATEUR_A_CENTRE_INTERET",
+      joinColumns=@JoinColumn(name="id_centre_interet", referencedColumnName="id"),
+      inverseJoinColumns=@JoinColumn(name="id_utilisateur", referencedColumnName="id")
+    )
 	private List<Utilisateur> utilisateurs;
 }

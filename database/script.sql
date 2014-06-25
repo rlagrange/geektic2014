@@ -48,3 +48,19 @@ VALUES ('Lagrange', 'Romauin', 'romain.lagrange2@gmail.com');
 INSERT INTO "PUBLIC"."UTILISATEUR"
 ("NOM", "PRENOM", "MAIL" )
 VALUES ('Cavet', 'Amaury', 'amaurycavet@hotmail.fr');
+
+INSERT INTO "PUBLIC"."UTILISATEUR"
+("NOM", "PRENOM", "MAIL", "SEXE" )
+VALUES ('Cavet', 'Marie', 'mariecavet@cavet.fr', 'femme');
+
+INSERT INTO "PUBLIC"."CENTRE_INTERET"
+(  "LIBELLE" )
+VALUES ('Java')
+
+INSERT INTO "PUBLIC"."CENTRE_INTERET"
+(  "LIBELLE" )
+VALUES ('PHP')
+
+INSERT INTO "PUBLIC"."CENTRE_INTERET"
+(  "LIBELLE" )
+VALUES ('Symfony')

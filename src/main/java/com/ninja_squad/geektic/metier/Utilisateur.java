@@ -5,13 +5,18 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="UTILISATEUR")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Utilisateur {
 	
 	@Id
@@ -51,12 +56,7 @@ public class Utilisateur {
 		this.mail = mail;
 	}
 	
-	@ManyToMany
-	@JoinTable(
-      name="UTILISATEUR_A_CENTRE_INTERET",
-      joinColumns=@JoinColumn(name="id_utilisateur", referencedColumnName="id"),
-      inverseJoinColumns=@JoinColumn(name="id_centre_interet", referencedColumnName="id")
-    )
+	@ManyToMany(mappedBy = "utilisateurs")
 	private List<CentreInteret> interets;
 
 	public List<CentreInteret> getInterets() {
